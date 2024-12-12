@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Endividamento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Endividamento</h1>
+        <form id="calcForm">
+            <input type="number" id="endividamento" placeholder="Endividamento (R$)" required>
+            <input type="number" id="receita" placeholder="Receita Bruta (R$)" required>
+            <input type="number" id="patrimonio" placeholder="Patrimônio Líquido (R$)" required>
+            <input type="number" id="fornecedor" placeholder="Fornecedor (R$)" required>
+            <button type="button" onclick="calcularResultado()">Calcular</button>
+        </form>
+        <div id="resultado" class="result"></div>
+    </div>
+
+    <script>
+        function calcularResultado() {
+            const endividamento = parseFloat(document.getElementById('endividamento').value) || 0;
+            const receita = parseFloat(document.getElementById('receita').value) || 0;
+            const patrimonio = parseFloat(document.getElementById('patrimonio').value) || 0;
+            const fornecedor = parseFloat(document.getElementById('fornecedor').value) || 0;
+
+            const valorEndividamento = endividamento * 0.1;
+            const valorReceita = receita * 0.07;
+            const valorPatrimonio = patrimonio * 0.1;
+            const valorFornecedor = fornecedor * 0.1;
+
+            const menorValor = Math.min(valorEndividamento, valorReceita, valorPatrimonio, valorFornecedor);
+
+            const mensagem = menorValor >= 3000000 ? 'OK' : 'Negativo';
+            document.getElementById('resultado').innerText = `Resultado: ${mensagem}`;
+        }
+    </script>
+</body>
+</html>
